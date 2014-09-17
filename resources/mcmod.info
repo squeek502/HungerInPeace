@@ -1,0 +1,16 @@
+[
+{
+  "modid": "HungerInPeace",
+  "name": "Hunger In Peace",
+  "description": "Hunger and normal health regen in peaceful.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["squeek"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
