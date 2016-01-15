@@ -21,6 +21,12 @@ public class ModConfig
 	private static final String MIN_HEALTH_FROM_STARVATION_COMMENT =
 			"The lowest amount your health can go from starving in peaceful mode (0 means that you can die from starvation)";
 
+	public static boolean DISABLE_HUNGER_REGEN = ModConfig.DISABLE_HUNGER_REGEN_DEFAULT;
+	private static final String DISABLE_HUNGER_REGEN_NAME = "disable.natural.hunger.regen";
+	private static final boolean DISABLE_HUNGER_REGEN_DEFAULT = true;
+	private static final String DISABLE_HUNGER_REGEN_COMMENT =
+			"If true, disables the constant passive hunger regeneration in peaceful mode";
+
 	public static void init(File file)
 	{
 		config = new Configuration(file);
@@ -31,6 +37,7 @@ public class ModConfig
 
 		DISABLE_HEALTH_REGEN = config.get(CATEGORY_MAIN, DISABLE_HEALTH_REGEN_NAME, DISABLE_HEALTH_REGEN_DEFAULT, DISABLE_HEALTH_REGEN_COMMENT).getBoolean(true);
 		MIN_HEALTH_FROM_STARVATION = (float) config.get(CATEGORY_MAIN, MIN_HEALTH_FROM_STARVATION_NAME, MIN_HEALTH_FROM_STARVATION_DEFAULT, MIN_HEALTH_FROM_STARVATION_COMMENT).getDouble(MIN_HEALTH_FROM_STARVATION_DEFAULT);
+		DISABLE_HUNGER_REGEN = config.get(CATEGORY_MAIN, DISABLE_HUNGER_REGEN_NAME, DISABLE_HUNGER_REGEN_DEFAULT, DISABLE_HUNGER_REGEN_COMMENT).getBoolean(true);
 
 		config.save();
 	}

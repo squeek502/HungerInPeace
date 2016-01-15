@@ -2,18 +2,21 @@ package squeek.hungerinpeace;
 
 import net.minecraft.world.EnumDifficulty;
 import net.minecraftforge.common.MinecraftForge;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import squeek.applecore.api.hunger.ExhaustionEvent;
 import squeek.applecore.api.hunger.HealthRegenEvent;
+import squeek.applecore.api.hunger.HungerRegenEvent;
 import squeek.applecore.api.hunger.StarvationEvent;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.event.FMLInterModComms;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.eventhandler.EventPriority;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod(modid = ModInfo.MODID, version = ModInfo.VERSION, dependencies = "required-after:AppleCore")
 public class HungerInPeace
@@ -36,7 +39,7 @@ public class HungerInPeace
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onExhausted(ExhaustionEvent.Exhausted event)
 	{
-		if (event.player.worldObj.difficultySetting != EnumDifficulty.PEACEFUL)
+		if (event.player.worldObj.getDifficulty() != EnumDifficulty.PEACEFUL)
 			return;
 
 		if (event.player.getFoodStats().getSaturationLevel() <= 0)
@@ -51,6 +54,15 @@ public class HungerInPeace
 
 		event.setCanceled(true);
 	}
+	
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public void onPeacefulHungerRegen(HungerRegenEvent.PeacefulRegen event)
+	{
+		if (!ModConfig.DISABLE_HUNGER_REGEN)
+			return;
+
+		event.setCanceled(true);
+	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onStarve(StarvationEvent.Starve event)
@@ -58,7 +70,7 @@ public class HungerInPeace
 		if (event.starveDamage != 0f)
 			return;
 
-		if (event.player.worldObj.difficultySetting != EnumDifficulty.PEACEFUL)
+		if (event.player.worldObj.getDifficulty() != EnumDifficulty.PEACEFUL)
 			return;
 
 		if (event.player.getHealth() <= ModConfig.MIN_HEALTH_FROM_STARVATION)
