@@ -21,7 +21,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Mod(modid = ModInfo.MODID, version = ModInfo.VERSION, dependencies = "required-after:AppleCore")
 public class HungerInPeace
 {
-	public static final Logger Log = LogManager.getLogger(ModInfo.MODID);
+	public static final Logger LOG = LogManager.getLogger(ModInfo.MODID);
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
