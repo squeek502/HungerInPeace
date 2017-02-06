@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Mod(modid = ModInfo.MODID, version = ModInfo.VERSION, dependencies = "required-after:AppleCore")
+@Mod(modid = ModInfo.MODID, version = ModInfo.VERSION, dependencies = "required-after:applecore")
 public class HungerInPeace
 {
 	public static final Logger LOG = LogManager.getLogger(ModInfo.MODID);
@@ -39,7 +39,7 @@ public class HungerInPeace
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onExhausted(ExhaustionEvent.Exhausted event)
 	{
-		if (event.player.worldObj.getDifficulty() != EnumDifficulty.PEACEFUL)
+		if (event.player.world.getDifficulty() != EnumDifficulty.PEACEFUL)
 			return;
 
 		if (event.player.getFoodStats().getSaturationLevel() <= 0)
@@ -70,7 +70,7 @@ public class HungerInPeace
 		if (event.starveDamage != 0f)
 			return;
 
-		if (event.player.worldObj.getDifficulty() != EnumDifficulty.PEACEFUL)
+		if (event.player.world.getDifficulty() != EnumDifficulty.PEACEFUL)
 			return;
 
 		if (event.player.getHealth() <= ModConfig.MIN_HEALTH_FROM_STARVATION)
