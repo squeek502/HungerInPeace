@@ -1,6 +1,6 @@
 [
 {
-  "modid": "HungerInPeace",
+  "modid": "hungerinpeace",
   "name": "Hunger In Peace",
   "description": "Hunger and normal health regen in peaceful.",
   "version": "${version}",
